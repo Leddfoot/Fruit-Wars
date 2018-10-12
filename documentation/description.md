@@ -1,0 +1,13 @@
+Description
+
+Initially should contain one "player" that buys and sells fruits. These are bought and sold to six different "regions." To start, the transactions occur between player and territory, where one buys and the other sells. Each territory should have stable "demands" or preferences. For example, one territory should always consume more of one or two types of fruits, but have a steady demand for all or most types. 
+
+To make it interesting, random events should occur that drastically affect the supply or demand of a fruit type. For example, a drought in one region that produces mostly bananas, will drastically reduce supply there and possibly overall. In contrast, bumper crops will flood the market. In addition, there should also be events that drastically change the demand, for example summer creates a ridiculously high demand for pineapples.
+
+Prices should follow basic economics constructs (ie. high demand, low supply, high price). The "player" has no choice about pricing, and must buy or sell products at the accepted market price in a given region, although this could change in the future.
+
+There will be a finite number of "turns" per game, and this will have to be tested and adjusted. The turn starts by the player choosing the region he will travel to. Each turn the player must travel to a new region (not the one they are currently in) During the turn, all prices are "frozen" and the player can only conduct business in the region he/she is currently in. The player can buy, sell, or hold their inventory. In addition, the player can borrow money which accrues interest.
+
+The point of the game is to try to buy products in a region where prices are low, and then move to a region where prices are high and sell, and buy fruit to be sold in the next region. Some fruits will not be sellable in regions, ie no demand. The prices will vary slightly each turn, in a "semi-controlled" random manner. There should be catastrophic events often and randomly that drastically affect inventory or demand.
+
+The player should typically be able to have several fruit types in inventory, and typically will not sell all items every time in every region (or must sell at a loss if they need cash to buy a large amount). If able to buy or sell fruit in a region, the amount will be unlimited. Future version may cap demand quantity and purchase/available quantities. The demand mechanisms will be "generic" at first, ie regions are independent and do not affect each other, although this could be an interesting updgrade in future versions.

@@ -1,0 +1,62 @@
+Trying to lay this out in MVC design Pattern. Following the specific example below:
+https://www.sitepoint.com/mvc-design-pattern-javascript/
+
+Note: A great model of demo tests are at the following link: ttps://codepen.io/SitePoint/pen/zzyoXw
+
+Model
+The Model cares only about data. The model in this design pattern cares only about JSON or objects that come from the server.
+    Player Data object
+        Cash
+        debt
+        inventory {typeOfFruit: quantity owned}        
+    Bank object
+        loan balance
+        interest rate
+    Region object
+        typeOfFruit:
+        marketPrice
+    Fruits array
+        typeOfFruit
+        
+
+
+View
+
+The View cares about the DOM. The DOM is the browser API you use to make HTML manipulations. 
+In MVC, no other part cares about changing the DOM except for the view. 
+
+Entitities for information visible (to player)
+    Player
+        Cash on Hand
+        inventory-various fruits purchased
+    Region
+        fruits on the market (not all fruits will be sellable/purchasable in all regions)
+        market prices of fruits
+
+Actions available to Player
+    Buy or sell fruits available in a region
+    Borrow Cash
+    Repay Loan
+
+Controller
+    The controller is the middleman. Imports the view and model, calculates stuff.
+
+    Actions
+        Increase cash on hand
+        Decrease cash on hand
+
+        increase quantity of a single fruit(in player inventory)
+        decrease quantity of a single fruit(in player inventory)
+
+        borrow cash
+        payback loan
+
+        generate interest (every turn)
+
+        random percentage increase of fruit marketPrice in a region OR
+        random percentage decrease of fruit marketPrice in a region (smaller changes)
+
+        random creation of significant events that have large effects on the price of a fruit, and cause 
+        large market price increases or decreases. This is where the players gain or lose large amounts of cash 
+        because they are holding a fruit that has bottomed out and have to hold it or vice versa
+
