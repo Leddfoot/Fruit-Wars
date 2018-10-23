@@ -38,7 +38,6 @@ const buyFruit = (currentRegion, fruitType, quantityToBuy) => {
   if (!currentRegionData[priceString]) {
     console.log('that fruit is not traded in this region')
   } else if (currentRegionData[priceString] * quantityToBuy < player.cash) {
-    // console.log('Yes, that region has that fruit')
     const priceOfPurchase = calculateTransactionCost(currentRegionData[priceString], quantityToBuy)
     player.cash -= priceOfPurchase
 
@@ -48,20 +47,17 @@ const buyFruit = (currentRegion, fruitType, quantityToBuy) => {
       quantity: quantityToBuy,
       priceOfPurchase
     })
-    //  console.log(player.inventory);
 
     const transactionType = 'bought'
 
-    transactionLog.push({ 'quantity': quantityToBuy, 'fruitType': fruitType, 'transactionCost': priceOfPurchase, 'Transaction Type': transactionType })
+    transactionLog.push({ 'quantity': quantityToBuy, 'fruitType': fruitType, 'transactionCost': priceOfPurchase, 'transactionType': transactionType })
   } else {
     console.log('not enough cash for that')
   }
 }
 
-const checkAvailability = (currentRegion, player, fruitType, quantityToSell) => {
+const checkSellingAvailability = (currentRegion, player, fruitType, quantityToSell) => {
   const inventory = player.inventory
-  // console.log(`this is inventory ${inventory}`);
-  // console.log(player[inventory]);
 
   let index
   let enoughToSellInOneGroup = -1
@@ -80,7 +76,6 @@ const checkAvailability = (currentRegion, player, fruitType, quantityToSell) => 
     decrementInventory(currentRegion, index, fruitType, quantityToSell)
   } else {
     index = inventory.findIndex(sellAcrossMultipleIndexes)
-    console.log('index' + index)
     if (index === -1) {
       console.log('you don\'t have any to sell')
     } else {
@@ -88,7 +83,7 @@ const checkAvailability = (currentRegion, player, fruitType, quantityToSell) => 
       const remainingInventoryToSell = quantityToSell - partialAmountToSell
 
       decrementInventory(currentRegion, index, fruitType, partialAmountToSell)
-      checkAvailability(currentRegion, player, fruitType, remainingInventoryToSell)
+      checkSellingAvailability(currentRegion, player, fruitType, remainingInventoryToSell)
     }
   }
 }
@@ -104,12 +99,11 @@ const decrementInventory = (currentRegion, index, fruitType, quantityToSell) => 
   player.cash += priceOfPurchase
   const transactionType = 'sold'
 
-  transactionLog.push({ 'quantity': quantityToSell, 'fruitType': fruitType, 'transactionCost': priceOfPurchase, 'Transaction Type': transactionType })
+  transactionLog.push({ 'quantity': quantityToSell, 'fruitType': fruitType, 'transactionCost': priceOfPurchase, 'transactionType': transactionType })
   if (player.inventory[index].quantity === 0) {
     player.inventory.splice(index, 1)
   }
 
-  console.log(transactionLog)
 }
 
 const sellFruit = (currentRegion, fruitType, quantityToSell) => {
@@ -121,8 +115,8 @@ const sellFruit = (currentRegion, fruitType, quantityToSell) => {
     return
   }
 
-  checkAvailability(currentRegion, player, fruitType, quantityToSell)
+  checkSellingAvailability(currentRegion, player, fruitType, quantityToSell)
 }
-console.log(player.inventory)
 
-export { increasePlayerCash, decreasePlayerCash, borrowCash, accrueInterest, payLoan, buyFruit, sellFruit }
+export { increasePlayerCash, decreasePlayerCash, borrowCash, accrueInterest, payLoan, buyFruit, sellFruit, getCurrentRegionData, checkSellingAvailability}
+//checkSellingAvailability() is only exported to be available for testing
