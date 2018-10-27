@@ -30,7 +30,7 @@ describe('player object', () => {
     })
   })
 
-  describe('borrow cash functionality', () => {
+  describe('borrowCash()', () => {
     it('should add the amount borrowed to bank.playerDebt', () => {
       model.bank.playerDebt = 0
       controller.borrowCash(555)
@@ -42,7 +42,7 @@ describe('player object', () => {
       assert.equal(model.player.cash, 777)
     })
   })
-  describe('interest rate testing', () => {
+  describe('accrueInterest()', () => {
     it('should add the interest percentage to the debt', () => {
       model.bank.playerDebt = 100
       controller.accrueInterest()
@@ -86,7 +86,7 @@ describe('sellFruit()', () => {
 })
 
 
-describe('checkSellingAvailability', () => {
+describe('checkSellingAvailability()', () => {
   it('should be somewhat mindbending', () => {
     assert.equal(true, true)
   })

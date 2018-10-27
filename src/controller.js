@@ -118,5 +118,11 @@ const sellFruit = (currentRegion, fruitType, quantityToSell) => {
   checkSellingAvailability(currentRegion, player, fruitType, quantityToSell)
 }
 
-export { increasePlayerCash, decreasePlayerCash, borrowCash, accrueInterest, payLoan, buyFruit, sellFruit, getCurrentRegionData, checkSellingAvailability}
+console.log(player.inventory);
+
+// const getCurrentInventory = ((player.inventory) => {
+ 
+// })
+
+export { increasePlayerCash, decreasePlayerCash, borrowCash, accrueInterest, payLoan, buyFruit, sellFruit, getCurrentRegionData, checkSellingAvailability} //, getCurrentInventory}
 //checkSellingAvailability() is only exported to be available for testing
