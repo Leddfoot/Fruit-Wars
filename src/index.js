@@ -18,7 +18,7 @@ buyFruit(currentRegion, 'peach', 33)
 buyFruit(currentRegion, 'mango', 40)
 // buyFruit(currentRegion, 'mango', 30)
 // buyFruit(currentRegion, 'mango', 80)
-// sellFruit(currentRegion, 'mango', 20)
+sellFruit(currentRegion, 'mango', 20)
 // sellFruit(currentRegion, 'mango', 18)
 // sellFruit(currentRegion, 'mango', 3)
 // sellFruit(currentRegion, 'mango', 40)
@@ -27,6 +27,8 @@ buyFruit(currentRegion, 'mango', 40)
 // sellFruit(currentRegion, 'mango', 6000)
 // sellFruit(currentRegion, 'peach', 34)
 // sellFruit(currentRegion, 'peach', 33)
+
+
 
 
 // export { currentRegion }

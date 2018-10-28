@@ -63,7 +63,10 @@ const checkSellingAvailability = (currentRegion, player, fruitType, quantityToSe
   let enoughToSellInOneGroup = -1
 
   function getIndividualInventories (element) {
-    return element.quantity >= quantityToSell
+    if (fruitType === element.fruitType) {
+      return element.quantity >= quantityToSell
+    }
+    
   }
 
   function sellAcrossMultipleIndexes (element) {
@@ -103,7 +106,8 @@ const decrementInventory = (currentRegion, index, fruitType, quantityToSell) => 
   if (player.inventory[index].quantity === 0) {
     player.inventory.splice(index, 1)
   }
-
+  console.log(player.inventory);
+  
 }
 
 const sellFruit = (currentRegion, fruitType, quantityToSell) => {
