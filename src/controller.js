@@ -1,6 +1,6 @@
 // Controller
 
-import { player, transactionLog, region, bank, fruits } from './model.js'
+import { player, transactionLog, region, bank } from './model.js'
 
 const increasePlayerCash = (amount) => {
   player.cash += amount
@@ -51,6 +51,7 @@ const buyFruit = (currentRegion, fruitType, quantityToBuy) => {
     const transactionType = 'bought'
 
     transactionLog.push({ 'quantity': quantityToBuy, 'fruitType': fruitType, 'transactionCost': priceOfPurchase, 'transactionType': transactionType })
+    console.log(transactionLog)
   } else {
     console.log('not enough cash for that')
   }
@@ -63,14 +64,17 @@ const checkSellingAvailability = (currentRegion, player, fruitType, quantityToSe
   let enoughToSellInOneGroup = -1
 
   function getIndividualInventories (element) {
-    if (fruitType === element.fruitType) {
+    if (fruitType === element.fruitType && element.quantity > quantityToSell) {
       return element.quantity >= quantityToSell
     }
     
   }
 
   function sellAcrossMultipleIndexes (element) {
-    return element.quantity > 0
+    if (fruitType === element.fruitType) {
+      return element.quantity > 0
+    }
+    
   }
   enoughToSellInOneGroup = player.inventory.findIndex(getIndividualInventories)
 
@@ -80,7 +84,7 @@ const checkSellingAvailability = (currentRegion, player, fruitType, quantityToSe
   } else {
     index = inventory.findIndex(sellAcrossMultipleIndexes)
     if (index === -1) {
-      console.log('you don\'t have any to sell')
+      console.log('you don\'t have any more to sell')
     } else {
       const partialAmountToSell = inventory[index].quantity
       const remainingInventoryToSell = quantityToSell - partialAmountToSell
@@ -101,16 +105,19 @@ const decrementInventory = (currentRegion, index, fruitType, quantityToSell) => 
 
   player.cash += priceOfPurchase
   const transactionType = 'sold'
+  
 
   transactionLog.push({ 'quantity': quantityToSell, 'fruitType': fruitType, 'transactionCost': priceOfPurchase, 'transactionType': transactionType })
   if (player.inventory[index].quantity === 0) {
     player.inventory.splice(index, 1)
   }
-  console.log(player.inventory);
+  console.log(player.inventory)
+  
   
 }
 
 const sellFruit = (currentRegion, fruitType, quantityToSell) => {
+  console.log(transactionLog)
   const currentRegionData = region[currentRegion]
   const priceString = `${fruitType}Price`
 
@@ -127,6 +134,10 @@ console.log(player.inventory);
 // const getCurrentInventory = ((player.inventory) => {
  
 // })
+
+// console.log(player.inventory);
+// console.log(transactionLog)
+
 
 export { increasePlayerCash, decreasePlayerCash, borrowCash, accrueInterest, payLoan, buyFruit, sellFruit, getCurrentRegionData, checkSellingAvailability} //, getCurrentInventory}
 //checkSellingAvailability() is only exported to be available for testing
