@@ -69,7 +69,7 @@ describe('buyFruit()', () => {
     model.player.cash = 10000
     model.region.south.peachPrice = 10
     controller.buyFruit('south', 'peach', 1)
-    model.player.inventory.should.include.something.that.deep.equals({ fruitType: 'peach', quantity: 1, priceOfPurchase: 10 })
+    model.player.inventory.should.include.something.that.deep.equals({ fruitType: 'peach', quantity: 1, priceOfPurchase: 10, "unitPriceOfPurchase": 10 })
   })
   it('should add details of the purchase to transactionLog when a transaction does occur', () => {
     model.transactionLog = []
@@ -94,7 +94,7 @@ describe('checkSellingAvailability()', () => {
     model.player.inventory = []
     controller.buyFruit('south', 'mango', 50)    
     controller.checkSellingAvailability('south', model.player, 'mango', 22)
-    model.player.inventory.should.include.something.that.deep.equals({ fruitType: 'mango', quantity: 28, priceOfPurchase: 5000 })
+    model.player.inventory.should.include.something.that.deep.equals({ fruitType: 'mango', quantity: 28, priceOfPurchase: 5000, "unitPriceOfPurchase": 100 })
   })
   it('should remove the quantity to be sold from player.inventory, if there is enough in MORE THAN one group to satisfy the amount that is being sold ', () => {
     model.player.inventory = []
@@ -103,8 +103,7 @@ describe('checkSellingAvailability()', () => {
     controller.checkSellingAvailability('south', model.player, 'mango', 100);
     assert(Array.isArray([]), 'THIS TEST NEEDS TO BE IMPROVED!');
   })
-  //  YOU ARE HERE!!! when you remove an amount larger than the amount available, checkAvailability is selling a partial amount
-  //which is right but you need to think about trying to sell more than you have !! it should offer to sell max qty or something
+
   it('should remove the quantity to be sold from player.inventory, if there is a partial amount available ', () => {
     model.player.inventory = []
     controller.buyFruit('south', 'mango', 50)
@@ -123,5 +122,11 @@ describe('checkSellingAvailability()', () => {
     controller.buyFruit('south', 'mango', 50)
     controller.checkSellingAvailability('south', model.player, 'mango', 100)
     model.transactionLog.should.include.something.that.deep.equals({ quantity: 50, fruitType: 'mango', transactionCost: 5000, transactionType: 'sold' })
+  })
+})
+
+describe('temporaryPriceRandomizer()', () => {
+  it('should randomly decide if an event should happen, when deciding fruit prices for a new round, there should be a 20% chance for each individual fruit in each region', () => {
+    // assert.equal(controller.sellFruit('south', 'guava', 33), undefined)
   })
 })

@@ -40,18 +40,20 @@ const buyFruit = (currentRegion, fruitType, quantityToBuy) => {
   } else if (currentRegionData[priceString] * quantityToBuy < player.cash) {
     const priceOfPurchase = calculateTransactionCost(currentRegionData[priceString], quantityToBuy)
     player.cash -= priceOfPurchase
+    const unitPriceOfPurchase = priceOfPurchase / quantityToBuy
 
-    // NOTE!!Price of Purchase will be used in future updates for transaction history
     player.inventory.push({
       fruitType: fruitType,
       quantity: quantityToBuy,
-      priceOfPurchase
+      priceOfPurchase,
+      unitPriceOfPurchase
     })
 
     const transactionType = 'bought'
 
     transactionLog.push({ 'quantity': quantityToBuy, 'fruitType': fruitType, 'transactionCost': priceOfPurchase, 'transactionType': transactionType })
     console.log(transactionLog)
+    console.log(player.inventory)
   } else {
     console.log('not enough cash for that')
   }
@@ -111,13 +113,13 @@ const decrementInventory = (currentRegion, index, fruitType, quantityToSell) => 
   if (player.inventory[index].quantity === 0) {
     player.inventory.splice(index, 1)
   }
-  console.log(player.inventory)
+  // console.log(player.inventory)
   
   
 }
 
 const sellFruit = (currentRegion, fruitType, quantityToSell) => {
-  console.log(transactionLog)
+  // console.log(transactionLog)
   const currentRegionData = region[currentRegion]
   const priceString = `${fruitType}Price`
 
@@ -129,15 +131,10 @@ const sellFruit = (currentRegion, fruitType, quantityToSell) => {
   checkSellingAvailability(currentRegion, player, fruitType, quantityToSell)
 }
 
-console.log(player.inventory);
-
-// const getCurrentInventory = ((player.inventory) => {
- 
-// })
-
-// console.log(player.inventory);
-// console.log(transactionLog)
+const temporaryPriceRandomizer = () => {
+  
+}
 
 
-export { increasePlayerCash, decreasePlayerCash, borrowCash, accrueInterest, payLoan, buyFruit, sellFruit, getCurrentRegionData, checkSellingAvailability} //, getCurrentInventory}
+export { increasePlayerCash, decreasePlayerCash, borrowCash, accrueInterest, payLoan, buyFruit, sellFruit, getCurrentRegionData, checkSellingAvailability, temporaryPriceRandomizer} //, getCurrentInventory}
 //checkSellingAvailability() is only exported to be available for testing
