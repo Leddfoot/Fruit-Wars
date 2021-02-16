@@ -1,3 +1,7 @@
+
+
+//Just testing
+//when this is all up to speed, start developing tests
 // Controller
 
 import { player, transactionLog, region, bank } from './model.js'
